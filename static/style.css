@@ -1,0 +1,45 @@
+body {
+    background-color: blanchedalmond;
+    margin-top: 100px;
+  }
+
+  h2 {
+      color: brown;
+  }
+
+  .cadastro-clientes {
+    display: flex;
+    padding-bottom: 25px;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    
+  }
+
+  form {
+    flex-direction: column;
+    border: 2px solid maroon;
+    padding: 20px;
+  }
+
+  form label {
+    margin-bottom: 5px;
+  }
+
+  form input {
+    margin-bottom: 10px;
+  }
+
+  form .botao-registro {
+    background-color: maroon;
+    color:aliceblue;
+    border-radius: 2px;
+    height: 30px;
+  
+
+  }
+
+  input {
+      width: 200px;
+      border-radius: 2px;
+  }

@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Home</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+      crossorigin="anonymous"
+    />
+
+    <style>
+      body {
+        background-color: blanchedalmond;
+        margin-top: 100px;
+      }
+
+      h2 {
+        color: brown;
+      }
+
+      .cadastro-clientes {
+        display: flex;
+        padding-bottom: 25px;
+        text-align: center;
+        justify-content: center;
+        align-items: center;
+      }
+
+      form {
+        flex-direction: column;
+        border: 2px solid rgb(113, 105, 105);
+        border-radius: 10px;
+        padding: 20px;
+      }
+
+      form label {
+        margin-bottom: 5px;
+      }
+
+      form input {
+        margin-bottom: 20px;
+      }
+
+      form .botao-registro {
+        background-color: maroon;
+        color: aliceblue;
+        border-radius: 2px;
+        height: 30px;
+      }
+
+      input {
+        width: 200px;
+        height: 30px;
+        border-radius: 2px;
+      }
+
+      .container-img {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
+
+      .logo-img {
+        position: fixed;
+        width: 600px;
+        height: auto;
+        z-index: -1; /* Send the image behind other elements */
+        opacity: 0.05; /* Adjust the transparency */
+      }
+
+      .header-top {
+        position: fixed;
+        top: 0; /* Position at the top of the viewport */
+        left: 0; /* Align to the left edge of the viewport */
+        width: 100%;
+        background-color: maroon; /* Change the background color as needed */
+        padding: 30px 0;
+        text-align: center; /* Center-align the links */
+        z-index: 1000;
+        opacity: 0.8;
+      }
+
+      .header-top ul a:hover {
+        /* Define the styles you want to apply when hovering over the links */
+        color: rgb(12, 12, 12); /* For example, change the text color to red */
+        /* Add any other styles as needed */
+      }
+
+      /* CSS for the <a> tags */
+      .header-top a {
+        font-size: 24px;
+        padding-left: 100px;
+        text-decoration: none; /* Remove default underline */
+        color: white; /* Set the text color to lightcoral */
+        margin: 0 10px; /* Add margin to create space between links */
+      }
+    </style>
+  </head>
+  <header>
+    <div class="header-top">
+      <ul>
+        <a href="/">Home</a>
+        <a href="/register">Cadastro</a>
+        <a href="#">Buscar</a>
+        <a href="#">Agendar</a>
+      </ul>
+    </div>
+  </header>
+
+  <body>
+    <div class="container-img">
+      <div class="cadastro-clientes">
+        <form
+          action="{{ url_for('register') }}"
+          method="post"
+          id="cadastro-cliente-form"
+        >
+          <h2>Cadastro de Clientes</h2>
+          <br />
+          <label for="nome">Nome:</label>
+          <input
+            type="text"
+            id="nome"
+            name="nome"
+            placeholder="Nome"
+            required
+          /><br />
+          <label for="telefone">Telefone:</label>
+          <input
+            type="text"
+            id="telefone"
+            name="telefone"
+            placeholder="Telefone"
+            required
+          /><br />
+          <label for="email">E-mail:</label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            placeholder="E-mail"
+            required
+          /><br />
+          <button type="submit" class="btn btn-primary">Cadastrar</button>
+        </form>
+
+        <script
+          src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+          integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+          crossorigin="anonymous"
+        ></script>
+
+        <img
+          src="{{ url_for('static', filename='barbershop_logo1.png') }}"
+          alt="barbershop_logo"
+          class="logo-img"
+        />
+      </div>
+    </div>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6 offset-md-3 mt-5">
+          {% with messages = get_flashed_messages() %} {% if messages %} {% for
+          message in messages %}
+          <div id="alert" class="alert alert-success" role="alert">
+            {{ message }}
+          </div>
+          <script>
+            // Automatically close the alert after 3 seconds
+            setTimeout(function () {
+              document.getElementById('alert').style.display = 'none';
+            }, 3000);
+          </script>
+          {% endfor %} {% endif %} {% endwith %}
+
+          <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+          <script>
+            $(document).ready(function () {
+              $('#telefone').blur(function () {
+                let telefone = $(this).val();
+                // Regular expression to match phone number format (###) ###-####
+                let regex = /^\d{11}$/;
+                if (!regex.test(telefone)) {
+                  alert(
+                    'Telefone inválido. Por favor, insira no formato 00000000000'
+                  );
+                }
+              });
+            });
+          </script>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
